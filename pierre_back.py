@@ -7,13 +7,6 @@ from pydantic import BaseModel
 #===============================================================================
 
 def connect_to_database():
-    old_config = {
-        'user': 'pbcode_titi',
-        'password': 'Orbi6504',
-        'host': 'pbcode.io',
-        'port': 3306,  # Remplacez 3306 par le numéro de port approprié
-        'database': 'pbcode_presidents'
-    }
 
     config = {
         'user': 'pierrebejian',

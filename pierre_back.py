@@ -117,9 +117,6 @@ def delete_president(id: int):
     connection.close()
     return {"message": f"Président avec l'id {id} supprimé avec succès"}
 
-res = get_presidents()
-print(res)
-
 #===============================================================================
 #  Pour travailler tout seul en local, par défaut l'adresse du serveur backend
 #  est 127.0.0.1 ou localhost. Dans ce cas on pourra lancer le serveur de

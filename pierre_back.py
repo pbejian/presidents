@@ -7,12 +7,20 @@ from pydantic import BaseModel
 #===============================================================================
 
 def connect_to_database():
-    config = {
+    old_config = {
         'user': 'pbcode_titi',
         'password': 'Orbi6504',
         'host': 'pbcode.io',
         'port': 3306,  # Remplacez 3306 par le numéro de port approprié
         'database': 'pbcode_presidents'
+    }
+
+    config = {
+        'user': 'pierrebejian',
+        'password': 'kWsubUXvzckEP8YkuLRj',
+        'host': 'bp15582-001.eu.clouddb.ovh.net',
+        'port': 35399,   # 3306,    #45399,  # Remplacez 3306 par le numéro de port approprié
+        'database': 'pb_matrix'
     }
 
     connection = mysql.connector.connect(**config)  # Le préfiwe "**" permet de débaler un tuple

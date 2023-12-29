@@ -20,3 +20,4 @@ CMD ["uvicorn", "pierre_back:app", "--host", "0.0.0.0", "--port", "8001"]
 # 0.0.0.0:8001
 # docker build -t presidents .
 # docker run -d --name presidents-container -p 8001:8001 presidents
+# CMD ["uvicorn", "pierre_back:app", "--host", "0.0.0.0", "--port", "8001"]

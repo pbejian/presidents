@@ -43,7 +43,7 @@ def read_root():
 #-------------------------------------------------------------------------------
 
 @app.get("/get_presidents/")
-async def get_presidents():
+def get_presidents():
     connection, cursor = connect_to_database()
     cursor.execute("SELECT * FROM presidents")
     results = cursor.fetchall()
@@ -52,7 +52,7 @@ async def get_presidents():
     return results
 
 @app.get("/get_president_by_id/")
-async def get_president_by_id(id: int):
+def get_president_by_id(id: int):
     connection, cursor = connect_to_database()
     query = "SELECT * FROM presidents WHERE id = %s"
     cursor.execute(query, (id,))
@@ -70,7 +70,7 @@ class President(BaseModel):
     last_name: str
 
 @app.post("/create_president/")
-async def create_president(president: President):
+def create_president(president: President):
     connection, cursor = connect_to_database()
     query = "INSERT INTO presidents (first_name, last_name) VALUES (%s, %s)"
     values = (president.first_name, president.last_name)
@@ -85,7 +85,7 @@ async def create_president(president: President):
 #-------------------------------------------------------------------------------
 
 @app.put("/update_president_by_id/")
-async def update_president(id: int, president: President):
+def update_president(id: int, president: President):
     connection, cursor = connect_to_database()
     # Mise à jour du président
     query = "UPDATE presidents SET first_name = %s, last_name = %s WHERE id = %s"
@@ -101,7 +101,7 @@ async def update_president(id: int, president: President):
 #-------------------------------------------------------------------------------
 
 @app.delete("/delete_president/")
-async def delete_president(id: int):
+def delete_president(id: int):
     connection, cursor = connect_to_database()
     # Vérifier si le président existe
     cursor.execute("SELECT * FROM presidents WHERE id = %s", (id,))
@@ -116,6 +116,9 @@ async def delete_president(id: int):
     cursor.close()
     connection.close()
     return {"message": f"Président avec l'id {id} supprimé avec succès"}
+
+res = get_presidents()
+print(res)
 
 #===============================================================================
 #  Pour travailler tout seul en local, par défaut l'adresse du serveur backend

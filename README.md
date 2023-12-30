@@ -17,3 +17,18 @@ Pour lancer le conteneur :
 ```bash
 docker run -d --name presidents-container -p 8001:8001 presidents
 ```
+
+
+
+Pour lancer l'application vous pouvez ouvrir un navifateur à l'URL suivante :
+
+```
+http://localhost:8001
+```
+
+Ou bien vous pouvez aller voir l'image et le conteneur dans l'application **Docker desktop** et lancer le conteneur d'un simple clic.
+
+
+
+
+

@@ -9,11 +9,11 @@ from pydantic import BaseModel
 def connect_to_database():
 
     config = {
-        'user': 'pierrebejian',
-        'password': 'kWsubUXvzckEP8YkuLRj',
-        'host': 'bp15582-001.eu.clouddb.ovh.net',
-        'port': 35399,   # 3306,    #45399,  # Remplacez 3306 par le numéro de port approprié
-        'database': 'pb_matrix'
+        'user': 'xxxx',
+        'password': 'xxxx',
+        'host': 'xxxx',
+        'port': xxxx,   # 3306,    #45399,  # Remplacez 3306 par le numéro de port approprié
+        'database': 'xxxx'
     }
 
     connection = mysql.connector.connect(**config)  # Le préfiwe "**" permet de débaler un tuple
@@ -37,13 +37,13 @@ app = FastAPI()
 #-------------------------------------------------------------------------------
 
 @app.get("/")
-def read_root():
+async def read_root():
     return {"message": "Salut tout le monde !"}
 
 #-------------------------------------------------------------------------------
 
 @app.get("/get_presidents/")
-def get_presidents():
+async def get_presidents():
     connection, cursor = connect_to_database()
     cursor.execute("SELECT * FROM presidents")
     results = cursor.fetchall()
@@ -52,7 +52,7 @@ def get_presidents():
     return results
 
 @app.get("/get_president_by_id/")
-def get_president_by_id(id: int):
+async def get_president_by_id(id: int):
     connection, cursor = connect_to_database()
     query = "SELECT * FROM presidents WHERE id = %s"
     cursor.execute(query, (id,))
@@ -70,7 +70,7 @@ class President(BaseModel):
     last_name: str
 
 @app.post("/create_president/")
-def create_president(president: President):
+async def create_president(president: President):
     connection, cursor = connect_to_database()
     query = "INSERT INTO presidents (first_name, last_name) VALUES (%s, %s)"
     values = (president.first_name, president.last_name)
@@ -85,7 +85,7 @@ def create_president(president: President):
 #-------------------------------------------------------------------------------
 
 @app.put("/update_president_by_id/")
-def update_president(id: int, president: President):
+async def update_president(id: int, president: President):
     connection, cursor = connect_to_database()
     # Mise à jour du président
     query = "UPDATE presidents SET first_name = %s, last_name = %s WHERE id = %s"
@@ -101,7 +101,7 @@ def update_president(id: int, president: President):
 #-------------------------------------------------------------------------------
 
 @app.delete("/delete_president/")
-def delete_president(id: int):
+async def delete_president(id: int):
     connection, cursor = connect_to_database()
     # Vérifier si le président existe
     cursor.execute("SELECT * FROM presidents WHERE id = %s", (id,))
